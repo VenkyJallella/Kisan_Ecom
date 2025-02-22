@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Payment - Kisan Angadi{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Complete Your Payment</h2>
+    <p>Order ID: {{ order.id }}</p>
+    <p>Total Amount: ₹{{ order.total_price }}</p>
+
+    <form action="{% url 'order_success' order.id %}" method="POST">
+        {% csrf_token %}
+        <script src="https://checkout.razorpay.com/v1/checkout.js"
+                data-key="{{ razorpay_key_id }}"
+                data-amount="{{ order.total_price|floatformat:2|add:0 }}00"
+                data-currency="INR"
+                data-order_id="{{ razorpay_order_id }}"
+                data-buttontext="Pay Now"
+                data-name="Kisan Angadi"
+                data-description="Thank you for your purchase!"
+                data-theme.color="#28a745">
+        </script>
+    </form>
+</div>
+{% endblock %}

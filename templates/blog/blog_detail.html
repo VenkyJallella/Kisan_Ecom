@@ -1,0 +1,91 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container my-5">
+    <!-- Blog Header Section -->
+    <div class="jumbotron text-center bg-success text-white p-5 rounded">
+        <h1 class="display-4">{{ post.title }}</h1>
+        <p class="lead text-light">Published on {{ post.created_at |date:"F d, Y" }}</p>
+    </div>
+
+    <!-- Blog Image -->
+    <div class="text-center my-4">
+        <img src="{{ post.image.url }}" class="img-fluid rounded shadow-lg" alt="{{ post.title }}">
+    </div>
+
+    <!-- Blog Content -->
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <article class="p-4 bg-white rounded shadow">
+                <p class="fs-5 text-dark">{{ post.content|safe }}</p>
+            </article>
+
+            <!-- Share Section -->
+            <div class="mt-4 text-center">
+                <h5>📢 Share this post:</h5>
+                <a href="#" class="btn btn-primary btn-sm">Facebook</a>
+                <a href="#" class="btn btn-info btn-sm">Twitter</a>
+                <a href="#" class="btn btn-danger btn-sm">WhatsApp</a>
+            </div>
+
+            <!-- Comments Section -->
+            <div class="mt-5">
+                <h3>💬 Comments</h3>
+                <div class="list-group">
+                    {% for comment in blog.comments.all %}
+                    <div class="list-group-item">
+                        <strong>{{ comment.name }}</strong>
+                        <p class="mb-1">{{ comment.content }}</p>
+                        <small class="text-muted">{{ comment.created_at|date:"F d, Y" }}</small>
+                    </div>
+                    {% empty %}
+                    <p class="text-muted">No comments yet. Be the first to comment!</p>
+                    {% endfor %}
+                </div>
+
+                <!-- Add Comment Form -->
+                <div class="mt-4">
+                    <h4>📝 Leave a Comment</h4>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label class="form-label">Name</label>
+                            <input type="text" class="form-control" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Comment</label>
+                            <textarea class="form-control" name="content" rows="3" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success">Post Comment</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Related Posts -->
+    <div class="my-5">
+        <h3 class="text-center">📖 Related Posts</h3>
+        <div class="row">
+            {% for related_blog in related_blogs %}
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <img src="{{ related_blog.image.url }}" class="card-img-top" alt="{{ related_blog.title }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ related_blog.title }}</h5>
+                        <p class="card-text">{{ related_blog.excerpt|truncatewords:15 }}</p>
+                        <a href="{% url 'blog_detail' related_blog.slug %}" class="btn btn-success btn-sm">Read More</a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p class="text-center">No related posts available.</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+    
+{% endblock %}

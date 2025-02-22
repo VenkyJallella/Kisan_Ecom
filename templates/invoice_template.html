@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Invoice</title>
+</head>
+<body>
+    <h2>Invoice</h2>
+    <p><strong>Order ID:</strong> {{ order.id }}</p>
+    <p><strong>Name:</strong> {{ order.full_name }}</p>
+    <p><strong>Address:</strong> {{ order.address }}</p>
+    <p><strong>Phone:</strong> {{ order.phone }}</p>
+    <p><strong>Total Amount:</strong> ₹{{ order.total_price }}</p>
+    <p><strong>Payment Method:</strong> {{ order.payment_method }}</p>
+    
+    {% if order.payment_method == "COD" %}
+        <p><strong>Status: Payment Pending (Cash on Delivery)</strong></p>
+    {% else %}
+        <p><strong>Status: Paid</strong></p>
+    {% endif %}
+</body>
+</html>
