@@ -29,7 +29,9 @@ SECRET_KEY = 'django-insecure-q3kba4m2j_yqj(xy%(xim*5&k@-i4g5gjdu+-q^wbl#m3nudsm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['kisan-ecom.onrender.com',"127.0.0.1","localhost",]
+ALLOWED_HOSTS = ['kisan-ecom.onrender.com',"127.0.0.1","localhost","kisanangadi.com",
+    "www.kisanangadi.com",
+    "kisan-ecom.onrender.com",]
 
 
 # Application definition
