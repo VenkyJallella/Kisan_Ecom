@@ -18,9 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from django.urls import path
-from django.http import HttpResponse
-from django.contrib.auth.models import User
+
 
 
 urlpatterns = [
@@ -35,17 +33,4 @@ urlpatterns = [
 urlpatterns += static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
 
 
-def create_superuser(request):
-    username = "admin"
-    email = "admin@example.com"
-    password = "yourpassword"
 
-    if not User.objects.filter(username=username).exists():
-        User.objects.create_superuser(username, email, password)
-        return HttpResponse("Superuser created successfully! 🎉")
-    else:
-        return HttpResponse("Superuser already exists!")
-
-urlpatterns += [
-    path("create-admin/", create_superuser),  # Temporary route
-]
