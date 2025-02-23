@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'kisan_home',
     'Shop',
     'blog',
-    'About',
+   
     
 ]
 
@@ -147,7 +147,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-LOGIN_URL = "/accounts/login/"
+
 
 
 RAZORPAY_KEY_ID = "rzp_test_IA1SLZgcclLz8z"

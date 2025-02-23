@@ -26,7 +26,7 @@ urlpatterns = [
     path('', include('kisan_home.urls')),
     path('Shop/', include('Shop.urls')),
     path("blog/", include("blog.urls")), 
-    path('', include('About.urls')),
+    
     
 
 ]
