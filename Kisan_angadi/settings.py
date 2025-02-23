@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-q3kba4m2j_yqj(xy%(xim*5&k@-i4g5gjdu+-q^wbl#m3nudsm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['kisan-ecom.onrender.com',"127.0.0.1","localhost","kisanangadi.com",
     "www.kisanangadi.com",
@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'Shop',
     'blog',
     'About',
+    
 ]
 
 MIDDLEWARE = [
@@ -133,8 +134,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_URL = 'static/'
+INSTALLED_APPS += ["whitenoise.runserver_nostatic"]
+MIDDLEWARE.insert(1, "whitenoise.middleware.WhiteNoiseMiddleware")
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
@@ -147,6 +152,11 @@ LOGIN_URL = "/accounts/login/"
 
 RAZORPAY_KEY_ID = "rzp_test_IA1SLZgcclLz8z"
 RAZORPAY_KEY_SECRET = "FSojqYvnsoB2uYshzROMGPiz"
+
+
+
+
+
 
 
 # Default primary key field type
