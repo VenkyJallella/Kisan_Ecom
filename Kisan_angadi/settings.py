@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'kisan_home',
     'Shop',
     'blog',
+    'About',
 ]
 
 MIDDLEWARE = [
@@ -87,10 +88,13 @@ WSGI_APPLICATION = 'Kisan_angadi.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
 }
-
 DATABASES = {
-    'default': dj_database_url.config(default='sqlite:///db.sqlite3')
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',  # Database engine
+        'NAME': BASE_DIR / 'db.sqlite3',        # Path to the SQLite database file
+    }
 }
+
 
 
 
